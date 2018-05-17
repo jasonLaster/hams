@@ -3,7 +3,7 @@ import logo from "./logo.svg";
 import "./App.css";
 import { emojis, cycleItems } from "./utils/emojis";
 
-class ListItem extends React.Component {
+class ListItem extends Component {
   render() {
     const { index, item, highlight } = this.props;
     return (
