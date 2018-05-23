@@ -3,11 +3,35 @@ import logo from "./logo.svg";
 import "./App.css";
 import { emojis, cycleItems } from "./utils/emojis";
 
+const styles = {
+  background: {
+    light: {
+      primary: "white",
+      secondary: "grey"
+    },
+    dark: {
+      primary: "blue",
+      secondary: "grey"
+    }
+  },
+  padding: {
+    small: "2px",
+    medium: "4px"
+  },
+  size: {
+    small: {}
+  }
+};
+
 class ListItem extends Component {
   render() {
-    const { index, item, highlight } = this.props;
+    const { index, item, highlight, theme } = this.props;
     return (
-      <li key={index} className={index === highlight ? "highlighted" : null}>
+      <li
+        styles={{ backgroundColor: styles.background[theme].primary }}
+        key={index}
+        className={index === highlight ? "highlighted" : null}
+      >
         {item}
       </li>
     );
@@ -20,7 +44,7 @@ class UnorderedList extends React.Component {
     return (
       <ul>
         {items.map((item, i) => (
-          <ListItem item={item} index={i} highlight={highlight} />
+          <ListItem theme="light" item={item} index={i} highlight={highlight} />
         ))}
       </ul>
     );
