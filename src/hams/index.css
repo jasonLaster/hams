@@ -1,0 +1,9 @@
+.hams li {
+  margin: 80px;
+  font-size: 40px;
+}
+
+.hams .highlighted {
+  transform: scale(2);
+  transform-origin: center;
+}

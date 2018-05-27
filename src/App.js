@@ -1,98 +1,62 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
+import Hams from "./hams";
+import Wheel from "./wheel";
 import "./App.css";
-import { emojis, cycleItems } from "./utils/emojis";
-
-const styles = {
-  background: {
-    light: {
-      primary: "white",
-      secondary: "grey"
-    },
-    dark: {
-      primary: "blue",
-      secondary: "grey"
-    }
-  },
-  padding: {
-    small: "2px",
-    medium: "4px"
-  },
-  size: {
-    small: {}
-  }
-};
-
-class ListItem extends Component {
-  render() {
-    const { index, item, highlight, theme } = this.props;
-    return (
-      <li
-        styles={{ backgroundColor: styles.background[theme].primary }}
-        key={index}
-        className={index === highlight ? "highlighted" : null}
-      >
-        {item}
-      </li>
-    );
-  }
-}
-
-class UnorderedList extends React.Component {
-  render() {
-    const { items, highlight } = this.props;
-    return (
-      <ul>
-        {items.map((item, i) => (
-          <ListItem theme="light" item={item} index={i} highlight={highlight} />
-        ))}
-      </ul>
-    );
-  }
-}
-
-class Game extends React.Component {
-  render() {
-    return <div>{this.props.children}</div>;
-  }
-}
-
-/* the main page for the index route of this app */
-class HelloWorld extends React.Component {
-  render() {
-    return (
-      <div>
-        <h1>Friends of DevTools!</h1>
-        <Game>
-          <UnorderedList items={emojis} highlight={this.state.highlight} />
-          <button onClick={this.onSortClick}>Cycle</button>
-        </Game>
-      </div>
-    );
-  }
-}
 
 class App extends Component {
   state = {
-    highlight: 0
+    app: "wheel"
   };
 
-  onSortClick = () => {
+  constructor(props) {
+    super(props);
+    this.onAppClick = this.onAppClick.bind(this);
+    this.goBack = this.goBack.bind(this);
+  }
+
+  onAppClick(e) {
+    const { target } = e;
     this.setState({
-      highlight: cycleItems(this.state.highlight, emojis)
+      app: target.attributes.app.value
     });
-  };
+  }
+
+  goBack() {
+    this.setState({ app: null });
+  }
+
+  renderList() {
+    return (
+      <div>
+        <header className="App-header">
+          <h1 className="App-title">Time Travel</h1>
+        </header>
+        <div className="list">
+          <div onClick={this.onAppClick} app="hams">
+            Friends of DevTools
+          </div>
+          <div onClick={this.onAppClick} app="wheel">
+            Magic Wheel
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  renderApp() {
+    if (this.state.app == "hams") {
+      return <Hams goBack={this.goBack} />;
+    }
+
+    if (this.state.app == "wheel") {
+      return <Wheel goBack={this.goBack} />;
+    }
+  }
 
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Friends of DevTools</h1>
-        </header>
-
-        <UnorderedList items={emojis} highlight={this.state.highlight} />
-        <button onClick={this.onSortClick}>Cycle</button>
+      <div className={`App ${this.state.app}`}>
+        {this.state.app ? this.renderApp() : this.renderList()}
       </div>
     );
   }

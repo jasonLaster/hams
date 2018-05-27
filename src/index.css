@@ -3,6 +3,7 @@ body {
   padding: 0;
   font-family: sans-serif;
   height: 100%;
+  overflow: hidden;
 }
 
 main {
@@ -18,10 +19,8 @@ ul {
 li {
   margin: 0;
   padding: 0;
-  transition: transform 0.2s ease-out;
 }
 
-.highlighted {
-  transform: scale(2);
-  transform-origin: center;
+#root {
+  height: 100%;
 }
