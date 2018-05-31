@@ -22,6 +22,6 @@ export function boxShadow(color) {
 export function updateColor(color) {
   return {
     ...color,
-    hue: (color.hue + 10) % 255
+    hue: (color.hue + 20) % 255
   };
 }

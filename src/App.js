@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import Hams from "./hams";
 import Wheel from "./wheel";
+import Func from "./func";
 import "./App.css";
 
 class App extends Component {
   state = {
-    app: "wheel"
+    app: "func"
   };
 
   constructor(props) {
@@ -50,6 +51,10 @@ class App extends Component {
 
     if (this.state.app == "wheel") {
       return <Wheel goBack={this.goBack} />;
+    }
+
+    if (this.state.app == "func") {
+      return <Func goBack={this.goBack} />;
     }
   }
 

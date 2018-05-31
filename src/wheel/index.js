@@ -13,15 +13,15 @@ import "./index.css";
 const ranges = {
   blue: [],
   red: [],
-  green: []
+  green: [85, 165]
 };
 
-function isColor(name, color) {
-  if (ranges[name]) {
+function getName(color) {
+  return Object.keys(ranges).find(name => {
     const [min, max] = ranges[name];
     const { hue } = color;
-    return hue > min && hue < max;
-  }
+    return hue >= min && hue <= max;
+  });
 }
 
 class Circle extends Component {
@@ -30,7 +30,7 @@ class Circle extends Component {
     return (
       <div
         onClick={() => onSelect(color)}
-        className="circle"
+        className={`circle ${getName(color)}`}
         style={{
           background: getHSL(color),
           borderColor: getHSL(darker(0.1, color)),
@@ -55,10 +55,13 @@ class Selected extends Component {
           style={{
             background: getHSL(color),
             borderColor: getHSL(darker(0.1, color)),
-            boxShadow: boxShadow(getHSL(brightness(0.7, color)))
+            boxShadow: boxShadow(brightness(0.7, color))
           }}
         />
-        <div className="description"> {getHSL(color)}</div>
+        <div className="description">
+          <p>{getHSL(color)}</p>
+          <p>{getName(color)}</p>
+        </div>
       </div>
     );
   }
@@ -77,7 +80,7 @@ export default class Wheel extends Component {
   componentDidMount() {
     this.incrementColor = this.incrementColor.bind(this);
     this.onSelect = this.onSelect.bind(this);
-    setInterval(this.incrementColor, 200);
+    setInterval(this.incrementColor, 400);
   }
 
   incrementColor() {
