@@ -47,3 +47,10 @@
   background: hsl(201.3, 67.7%, 67.8%);
   cursor: pointer;
 }
+
+.list a {
+  margin: 20px;
+  color: #cef5ff;
+  font-size: 30px;
+  display: block;
+}

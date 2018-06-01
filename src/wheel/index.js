@@ -11,22 +11,35 @@ import {
 import "./index.css";
 
 const ranges = {
-  blue: [],
-  red: [],
+  blue: [200, 240],
+  red: [20, 40],
   green: [85, 165]
 };
 
+function isBlue(color) {
+  return isColor("blue", color);
+}
+function isRed(color) {
+  return isColor("red", color);
+}
+function isGreen(color) {
+  return isColor("green", color);
+}
+
+function isColor(name, color) {
+  const [min, max] = ranges[name];
+  const { hue } = color;
+  return hue >= min && hue <= max;
+}
+
 function getName(color) {
-  return Object.keys(ranges).find(name => {
-    const [min, max] = ranges[name];
-    const { hue } = color;
-    return hue >= min && hue <= max;
-  });
+  return Object.keys(ranges).find(name => isColor(name, color));
 }
 
 class Circle extends Component {
   render() {
     const { color, onSelect } = this.props;
+    const cName = getName(color);
     return (
       <div
         onClick={() => onSelect(color)}
@@ -107,3 +120,6 @@ export default class Wheel extends Component {
     );
   }
 }
+isBlue;
+isRed;
+isGreen;

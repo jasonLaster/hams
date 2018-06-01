@@ -57,7 +57,7 @@ class UnorderedList extends Component {
   }
 }
 
-export default class Hams extends Component {
+export default class Friends extends Component {
   state = {
     highlight: 0
   };

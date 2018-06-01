@@ -1,12 +1,13 @@
 import React, { Component } from "react";
-import Hams from "./hams";
+import Friends from "./friends";
 import Wheel from "./wheel";
-import Func from "./func";
+import Search from "./search";
+import Pulls from "./pulls";
 import "./App.css";
 
 class App extends Component {
   state = {
-    app: "func"
+    app: "wheel"
   };
 
   constructor(props) {
@@ -33,28 +34,39 @@ class App extends Component {
           <h1 className="App-title">Time Travel</h1>
         </header>
         <div className="list">
-          <div onClick={this.onAppClick} app="hams">
+          <a onClick={this.onAppClick} app="friends">
             Friends of DevTools
-          </div>
-          <div onClick={this.onAppClick} app="wheel">
+          </a>
+          <a onClick={this.onAppClick} app="wheel">
             Magic Wheel
-          </div>
+          </a>
+          <a onClick={this.onAppClick} app="search">
+            Search
+          </a>
+
+          <a onClick={this.onAppClick} app="pulls">
+            Github
+          </a>
         </div>
       </div>
     );
   }
 
   renderApp() {
-    if (this.state.app == "hams") {
-      return <Hams goBack={this.goBack} />;
+    if (this.state.app == "friends") {
+      return <Friends goBack={this.goBack} />;
     }
 
     if (this.state.app == "wheel") {
       return <Wheel goBack={this.goBack} />;
     }
 
-    if (this.state.app == "func") {
-      return <Func goBack={this.goBack} />;
+    if (this.state.app == "search") {
+      return <Search goBack={this.goBack} />;
+    }
+
+    if (this.state.app == "pulls") {
+      return <Pulls goBack={this.goBack} />;
     }
   }
 

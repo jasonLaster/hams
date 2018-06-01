@@ -1,0 +1,16 @@
+.search .list {
+  display: inline-block;
+  background: black;
+  color: white;
+  font-family: monospace;
+}
+
+.search {
+  font-size: 20px;
+  color: white;
+}
+
+.search .button {
+  font-weight: bold;
+  margin: 50px;
+}

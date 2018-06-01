@@ -1,14 +1,11 @@
 import React, { Component } from "react";
-import "./doodles.css";
-const breeds = [{ breed: "Bernese Mountain Dog", name: "Bernedoodle" }];
+import "./index.css";
 
 function binarySearch(list, value) {
-  // initial values for start, middle and end
   let start = 0;
   let stop = list.length - 1;
   let middle = Math.floor((start + stop) / 2);
 
-  // While the middle is not what we're looking for and the list does not have a single item
   while (list[middle] !== value && start < stop) {
     if (value < list[middle]) {
       stop = middle - 1;
@@ -16,30 +13,40 @@ function binarySearch(list, value) {
       start = middle + 1;
     }
 
-    // recalculate middle on every iteration
     middle = Math.floor((start + stop) / 2);
   }
 
-  // if the current middle item is what we're looking for return it's index, else return -1
-  return list[middle] !== value ? -1 : middle;
+  if (list[middle] === value) {
+    return value;
+  }
+
+  return -1;
 }
 
-export default class Func extends Component {
+export default class Search extends Component {
   onSearch() {
     const list = [2, 5, 8, 9, 13, 45, 67, 99];
-    console.log(binarySearch(list, 99)); // 7 -> returns the index of the item
+    const index = binarySearch(list, 99);
   }
 
   render() {
     return (
-      <div>
+      <div className="search">
         <header className="App-header">
           <h1 className="App-title" onClick={this.props.goBack}>
             Search
           </h1>
         </header>
         <div>
-          <button onClick={this.onSearch}>Search</button>
+          <div>
+            List: <div class="list">2, 5, 8, 9, 13, 45, 67, 99</div>
+          </div>
+          <div>
+            Item: <span class="term">99</span>
+          </div>
+          <div className="button" onClick={this.onSearch}>
+            Search
+          </div>
         </div>
       </div>
     );
